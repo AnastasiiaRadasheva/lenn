@@ -504,6 +504,118 @@
       line-height: 2;
     }
 
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 44px; height: 44px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(10px);
+      box-shadow: 0 4px 16px rgba(46,204,113,0.3);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .back-to-top:hover { background: var(--green-dark); }
+
+    /* ── DEMO / VIDEO ── */
+    .demo {
+      padding: 6rem 3rem;
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .demo .section-label { color: var(--green); }
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .demo-video-wrap {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #000;
+      border: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+    .demo-video-wrap video {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .demo-placeholder {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: rgba(255,255,255,0.4);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px dashed rgba(255,255,255,0.15);
+    }
+    .demo-placeholder .play-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(46,204,113,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      color: var(--green);
+    }
+    .demo-facts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+    .demo-fact {
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: background 0.2s;
+    }
+    .demo-fact:hover { background: rgba(46,204,113,0.06); }
+    .demo-fact-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.5rem;
+      color: var(--green);
+      line-height: 1;
+    }
+    .demo-fact-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 2px;
+      margin-top: 0.3rem;
+    }
+    @media (max-width: 768px) {
+      .demo { padding: 3rem 1.2rem; }
+      .demo-grid { grid-template-columns: 1fr; }
+      .back-to-top { bottom: 1.2rem; right: 1.2rem; }
+    }
+
     /* ── SCROLLBAR ── */
     ::-webkit-scrollbar { width: 4px; }
     ::-webkit-scrollbar-track { background: var(--cream); }
@@ -624,6 +736,147 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      z-index: 200;
+      width: 44px; height: 44px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      box-shadow: 0 4px 16px rgba(46,204,113,0.35);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .back-to-top:hover { transform: translateY(-3px); }
+
+    /* ── VIDEO SECTION ── */
+    .video-section {
+      padding: 6rem 3rem;
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .video-section .section-label { color: var(--green); }
+    .video-wrap {
+      margin-top: 3rem;
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      background: #000;
+      max-width: 900px;
+    }
+    .video-wrap video, .video-wrap iframe {
+      width: 100%;
+      display: block;
+      aspect-ratio: 16/9;
+      border: none;
+    }
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      border: 1px dashed rgba(255,255,255,0.15);
+      border-radius: 4px;
+    }
+    .video-placeholder .play-icon {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+    .video-placeholder p {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+    }
+    @media (max-width: 768px) {
+      .video-section { padding: 3rem 1.2rem; }
+      .back-to-top { bottom: 1.2rem; right: 1.2rem; width: 38px; height: 38px; }
+    }
+
+    /* ── BACK TO TOP ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem; right: 2rem;
+      z-index: 200;
+      width: 44px; height: 44px;
+      background: var(--green);
+      color: #fff;
+      border: none; border-radius: 2px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s, transform 0.2s;
+      box-shadow: 0 4px 16px rgba(46,204,113,0.4);
+      font-family: 'Space Mono', monospace;
+    }
+    .back-to-top.visible { opacity: 1; pointer-events: all; }
+    .back-to-top:hover { transform: translateY(-3px); }
+
+    /* ── VIDEO ── */
+    .video-section {
+      padding: 6rem 3rem;
+      background: var(--ink);
+      color: var(--cream);
+    }
+    .video-section .section-label { color: var(--green); }
+    .video-wrap {
+      margin-top: 3rem;
+      max-width: 900px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .video-wrap video, .video-wrap iframe {
+      width: 100%; display: block;
+      aspect-ratio: 16/9; border: none;
+    }
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: #0a0a0a;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+    }
+    .play-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      border: 2px solid var(--green);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .video-placeholder p {
+      font-family: 'Space Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 2px; color: rgba(255,255,255,0.35);
+      text-transform: uppercase; text-align: center; padding: 0 2rem;
+    }
+    @media (max-width: 768px) {
+      .video-section { padding: 3rem 1.2rem; }
+      .back-to-top { bottom: 1rem; right: 1rem; width: 38px; height: 38px; font-size: 1rem; }
+    }
+
   </style>
 </head>
 <body>
@@ -643,6 +896,7 @@
   <ul id="navMenu">
     <li><a href="#specs" data-i18n="nav_specs" onclick="closeMenu()">Spetsifikatsioonid</a></li>
     <li><a href="#gallery" data-i18n="nav_gallery" onclick="closeMenu()">Galerii</a></li>
+    <li><a href="#demo" data-i18n="nav_demo" onclick="closeMenu()">Demo</a></li>
     <li><a href="#process" data-i18n="nav_process" onclick="closeMenu()">Protsess</a></li>
     <li><a href="#team" data-i18n="nav_team" onclick="closeMenu()">Meeskond</a></li>
   </ul>
@@ -733,6 +987,76 @@
   </div>
 </section>
 
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <div class="fade-in">
+    <p class="section-label" data-i18n="video_label">// Demo video</p>
+    <h2 class="section-title" style="color:var(--cream)" data-i18n="video_title">Lennuk tegevuses</h2>
+  </div>
+  <div class="video-wrap fade-in">
+    <!-- Asenda src oma video lingiga: YouTube embed, mp4 fail vms -->
+    <!-- Näide YouTube: <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+    <!-- Näide mp4: <video src="video.mp4" controls poster="IMG_6030.jpeg"></video> -->
+    <div class="video-placeholder">
+      <div class="play-icon">▶</div>
+      <p data-i18n="video_placeholder">Lisa siia oma video — YouTube embed või mp4 fail</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- VIDEO -->
+<section class="video-section" id="video">
+  <div class="fade-in">
+    <p class="section-label" data-i18n="video_label">// Demo video</p>
+    <h2 class="section-title" style="color:var(--cream)" data-i18n="video_title">Lennuk tegevuses</h2>
+  </div>
+  <div class="video-wrap fade-in">
+    <!-- YouTube: asenda VIDEO_ID oma video ID-ga -->
+    <!-- <iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe> -->
+    <!-- MP4 fail: -->
+    <!-- <video src="video.mp4" controls poster="IMG_6030.jpeg"></video> -->
+    <div class="video-placeholder">
+      <div class="play-icon">▶</div>
+      <p data-i18n="video_placeholder">Lisa siia oma video — YouTube embed või mp4 fail</p>
+    </div>
+  </div>
+</section>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<!-- DEMO -->
+<section class="demo" id="demo">
+  <div class="fade-in">
+    <p class="section-label" data-i18n="demo_label">// Demonstratsioon</p>
+    <h2 class="section-title" style="color:var(--cream)" data-i18n="demo_title">Lennuk<br>Tegevuses</h2>
+  </div>
+  <div class="demo-grid fade-in">
+    <div class="demo-video-wrap">
+      <div class="demo-placeholder">
+        <div class="play-icon">▶</div>
+        <span data-i18n="demo_video_label">Lennu video peagi</span>
+      </div>
+    </div>
+    <div class="demo-facts">
+      <div class="demo-fact">
+        <div class="demo-fact-num">4</div>
+        <div class="demo-fact-label" data-i18n="demo_fact1">Sprinti · Iteratiivne arendus</div>
+      </div>
+      <div class="demo-fact">
+        <div class="demo-fact-num">9.4m</div>
+        <div class="demo-fact-label" data-i18n="demo_fact2">Parim testitud viskekaugus</div>
+      </div>
+      <div class="demo-fact">
+        <div class="demo-fact-num">3×</div>
+        <div class="demo-fact-label" data-i18n="demo_fact3">Parem tulemus vs Sprint 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROCESS -->
 <section class="process" id="process">
   <div class="fade-in">
@@ -801,21 +1125,24 @@
   </div>
   <div class="team-grid fade-in">
     <div class="member">
-      <div class="avatar">TM</div>
+      <div class="avatar">MA</div>
       <div class="member-name">Martin</div>
       <div class="member-role">CEO / Peavoltija</div>
+      <div class="member-role" style="margin-top:0.4rem;color:var(--green);font-size:0.6rem">🏆 Product Owner</div>
     </div>
     <div class="member">
-      <div class="avatar">TM</div>
+      <div class="avatar">AR</div>
       <div class="member-name">Anastasiia Radasheva</div>
       <div class="member-role">CTO / Aerodünaamik</div>
+      <div class="member-role" style="margin-top:0.4rem;color:var(--green);font-size:0.6rem">⚡ Scrum Master</div>
     </div>
     <div class="member">
-      <div class="avatar">TM</div>
+      <div class="avatar">IL</div>
       <div class="member-name">Illia</div>
       <div class="member-role">Design Lead</div>
+      <div class="member-role" style="margin-top:0.4rem;color:var(--green);font-size:0.6rem">🛠️ Developer</div>
     </div>
-
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -875,9 +1202,22 @@
       tri_p1: "<strong>Raudne kolmnurk</strong> on projektijuhtimise põhimudel, mis näitab kolme piirangu vahelist tasakaalu: <strong>Aeg, Maksumus ja Ulatus</strong>.",
       tri_p2: "Meie lennukitehase katses pidime pidevalt valima — kas teha rohkem lennukeid (ulatus), teha neid kiiremini (aeg) või kasutada rohkem materjali (maksumus).",
       tri_p3: "Agiilne lähenemine võimaldas meil iga sprintiga kolmnurka ümber kalibreerida ja leida optimaalne tasakaal. Tulemuseks on <strong>Spiral Glider V1</strong> — meie parim kompromiss kõigi kolme piirangu vahel.",
+      video_label: "// Demo video",
+      video_title: "Lennuk tegevuses",
+      video_placeholder: "Lisa siia oma video — YouTube embed või mp4 fail",
+      video_label: "// Demo video",
+      video_title: "Lennuk tegevuses",
+      video_placeholder: "Lisa siia oma video — YouTube embed või mp4 fail",
       team_label: "// Meeskond",
-      footer_copy: "© 2025 PaperWing Factory. Kõik õigused kaitstud.",
+      footer_copy: "© 2026 PaperWing Factory. Kõik õigused kaitstud.",
       footer_course: "VR 5.1 — Lennukitehas Rühmaülesanne",
+      nav_demo: "Demo",
+      demo_label: "// Demonstratsioon",
+      demo_title: "Lennuk<br>Tegevuses",
+      demo_video_label: "Lennu video peagi",
+      demo_fact1: "Sprinti · Iteratiivne arendus",
+      demo_fact2: "Parim testitud viskekaugus",
+      demo_fact3: "Parem tulemus vs Sprint 1",
     },
     en: {
       nav_specs: "Specifications",
@@ -909,9 +1249,22 @@
       tri_p1: "The <strong>Iron Triangle</strong> is a core project management model showing the balance between three constraints: <strong>Time, Cost and Scope</strong>.",
       tri_p2: "In our paper plane factory experiment, we constantly had to choose — make more planes (scope), make them faster (time), or use more materials (cost).",
       tri_p3: "The agile approach allowed us to recalibrate the triangle each sprint and find the optimal balance. The result is <strong>Spiral Glider V1</strong> — our best compromise across all three constraints.",
+      video_label: "// Demo video",
+      video_title: "Plane in action",
+      video_placeholder: "Add your video here — YouTube embed or mp4 file",
+      video_label: "// Demo video",
+      video_title: "Plane in action",
+      video_placeholder: "Add your video here — YouTube embed or mp4 file",
       team_label: "// Team",
-      footer_copy: "© 2025 PaperWing Factory. All rights reserved.",
+      footer_copy: "© 2026 PaperWing Factory. All rights reserved.",
       footer_course: "VR 5.1 — Paper Plane Factory Group Assignment",
+      nav_demo: "Demo",
+      demo_label: "// Demo",
+      demo_title: "The Plane<br>In Action",
+      demo_video_label: "Flight video coming soon",
+      demo_fact1: "Sprints · Iterative development",
+      demo_fact2: "Best tested throw distance",
+      demo_fact3: "Better result vs Sprint 1",
     }
   };
 
@@ -977,6 +1330,27 @@
     applyLang(currentLang);
   })();
 
+
+  // ── BACK TO TOP ──
+  window.addEventListener('scroll', () => {
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 400) btn.classList.add('visible');
+    else btn.classList.remove('visible');
+  });
+
+
+  // ── BACK TO TOP ──
+  window.addEventListener('scroll', () => {
+    const b = document.getElementById('backToTop');
+    if (b) b.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // ── BACK TO TOP ──
+  const btt = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 400);
+  });
+
   // ── FADE-IN ON SCROLL ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -986,5 +1360,10 @@
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Üles">↑</button>
 </body>
 </html>
