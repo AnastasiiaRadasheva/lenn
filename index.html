@@ -15,6 +15,17 @@
       --blue-ink: #1a3a8f;
       --gray: #888;
       --accent: #e8e0d0;
+      --nav-bg: rgba(250, 247, 242, 0.92);
+    }
+
+    [data-theme="dark"] {
+      --ink: #f0ece4;
+      --paper: #1a1a1a;
+      --cream: #111111;
+      --blue-ink: #6b9fff;
+      --gray: #888;
+      --accent: #2a2a2a;
+      --nav-bg: rgba(17, 17, 17, 0.92);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,7 +48,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.2rem 3rem;
-      background: rgba(250, 247, 242, 0.92);
+      background: var(--nav-bg);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--accent);
     }
@@ -70,7 +81,34 @@
 
     nav ul a:hover { color: var(--ink); }
 
-    /* ── HERO ── */
+    /* ── NAV CONTROLS ── */
+    .nav-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .lang-toggle, .theme-toggle {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      border: 1px solid var(--accent);
+      background: transparent;
+      color: var(--gray);
+      padding: 0.3rem 0.6rem;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .lang-toggle:hover, .theme-toggle:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    .lang-toggle .active { color: var(--ink); font-weight: 700; }
+
+    .theme-toggle { font-size: 0.9rem; padding: 0.25rem 0.5rem; }
     .hero {
       min-height: 100vh;
       display: grid;
@@ -504,31 +542,37 @@
 <nav>
   <a href="#" class="logo">Paper<span>Wing</span> Factory</a>
   <ul>
-    <li><a href="#specs">Spetsifikatsioonid</a></li>
-    <li><a href="#gallery">Galerii</a></li>
-    <li><a href="#process">Protsess</a></li>
-    <li><a href="#team">Meeskond</a></li>
+    <li><a href="#specs" data-i18n="nav_specs">Spetsifikatsioonid</a></li>
+    <li><a href="#gallery" data-i18n="nav_gallery">Galerii</a></li>
+    <li><a href="#process" data-i18n="nav_process">Protsess</a></li>
+    <li><a href="#team" data-i18n="nav_team">Meeskond</a></li>
   </ul>
+  <div class="nav-controls">
+    <button class="lang-toggle" id="langBtn" onclick="toggleLang()">
+      <span class="active">ET</span> / EN
+    </button>
+    <button class="theme-toggle" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-text fade-in">
-    <span class="badge">Sprint 4 — Uusim toodang</span>
+    <span class="badge" data-i18n="badge">Sprint 4 — Uusim toodang</span>
     <h1>
-      Kohtu<br>
+      <span data-i18n="hero_meet">Kohtu</span><br>
       <em>Spiral</em><br>
       <span class="outline">Glider</span><br>
       V1-ga.
     </h1>
-    <p class="hero-sub">
+    <p class="hero-sub" data-i18n="hero_sub">
       Sündinud meie rühma agiilsest eksperimendist — Taylorismist iteratiivse 
       arenduseni. Spiral Glider V1 on optimeeritud stabiilsuse ja maksimaalseks 
       viskekauguse jaoks standardsel A4 paberil.
     </p>
     <div class="btn-group">
-      <a href="#specs" class="btn primary">Vaata spetsifikatsioone</a>
-      <a href="#process" class="btn">Meie protsess</a>
+      <a href="#specs" class="btn primary" data-i18n="btn_specs">Vaata spetsifikatsioone</a>
+      <a href="#process" class="btn" data-i18n="btn_process">Meie protsess</a>
     </div>
   </div>
 
@@ -536,7 +580,7 @@
     <div class="plane-img-wrap">
       <img src="IMG_6030.jpeg" alt="Spiral Glider V1" />
       <span class="tag-sticker top">✦ Sprint 4 Build</span>
-      <span class="tag-sticker bottom">PaperWing Factory © 2026</span>
+      <span class="tag-sticker bottom">PaperWing Factory © 2025</span>
     </div>
   </div>
 </section>
@@ -544,39 +588,39 @@
 <!-- SPECS -->
 <section class="specs" id="specs">
   <div class="fade-in">
-    <p class="section-label">// Tehnilised andmed</p>
-    <h2 class="section-title">Spiral Glider V1<br>Spetsifikatsioonid</h2>
+    <p class="section-label" data-i18n="specs_label">// Tehnilised andmed</p>
+    <h2 class="section-title">Spiral Glider V1<br><span data-i18n="specs_title">Spetsifikatsioonid</span></h2>
   </div>
   <div class="specs-grid fade-in">
     <div class="spec-item">
-      <div class="spec-val">25</div>
-      <div class="spec-unit">sentimeetrit</div>
-      <div class="spec-name">Tiivaulatus</div>
+      <div class="spec-val">68</div>
+      <div class="spec-unit" data-i18n="unit_cm">sentimeetrit</div>
+      <div class="spec-name" data-i18n="spec_wingspan">Tiivaulatus</div>
     </div>
     <div class="spec-item">
       <div class="spec-val">5</div>
-      <div class="spec-unit">grammi</div>
-      <div class="spec-name">Paberikaal</div>
+      <div class="spec-unit" data-i18n="unit_g">grammi</div>
+      <div class="spec-name" data-i18n="spec_weight">Paberikaal</div>
     </div>
     <div class="spec-item">
       <div class="spec-val">9.4</div>
-      <div class="spec-unit">meetrit</div>
-      <div class="spec-name">Max viskekaugus</div>
+      <div class="spec-unit" data-i18n="unit_m">meetrit</div>
+      <div class="spec-name" data-i18n="spec_range">Max viskekaugus</div>
     </div>
     <div class="spec-item">
       <div class="spec-val">A4</div>
-      <div class="spec-unit">standard</div>
-      <div class="spec-name">Paberivormaat</div>
+      <div class="spec-unit" data-i18n="unit_std">standard</div>
+      <div class="spec-name" data-i18n="spec_format">Paberivormaat</div>
     </div>
     <div class="spec-item">
       <div class="spec-val">★★★★</div>
-      <div class="spec-unit">hindeskaalal 5</div>
-      <div class="spec-name">Stabiilsus</div>
+      <div class="spec-unit" data-i18n="unit_scale">hindeskaalal 5</div>
+      <div class="spec-name" data-i18n="spec_stability">Stabiilsus</div>
     </div>
     <div class="spec-item">
       <div class="spec-val">12</div>
-      <div class="spec-unit">volti</div>
-      <div class="spec-name">Voltimissamme</div>
+      <div class="spec-unit" data-i18n="unit_folds">volti</div>
+      <div class="spec-name" data-i18n="spec_folds">Voltimissamme</div>
     </div>
   </div>
 </section>
@@ -584,8 +628,8 @@
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
   <div class="fade-in">
-    <p class="section-label">// Lennuki galerii</p>
-    <h2 class="section-title">Meie parim<br>toodang</h2>
+    <p class="section-label" data-i18n="gallery_label">// Lennuki galerii</p>
+    <h2 class="section-title"><span data-i18n="gallery_title1">Meie parim</span><br><span data-i18n="gallery_title2">toodang</span></h2>
   </div>
   <div class="gallery-grid fade-in">
     <img src="IMG_6030.jpeg" alt="Spiral Glider küljelt" />
@@ -599,33 +643,33 @@
 <!-- PROCESS -->
 <section class="process" id="process">
   <div class="fade-in">
-    <p class="section-label">// Tootmisprotsess</p>
-    <h2 class="section-title" style="color:var(--cream)">Taylorismist<br>Agiilsuseni</h2>
+    <p class="section-label" data-i18n="process_label">// Tootmisprotsess</p>
+    <h2 class="section-title" style="color:var(--cream)"><span data-i18n="process_title1">Taylorismist</span><br><span data-i18n="process_title2">Agiilsuseni</span></h2>
   </div>
   <div class="process-steps fade-in">
     <div class="step">
       <span class="step-num">1</span>
       <div class="step-icon">🏭</div>
-      <h3>Konveier</h3>
-      <p>Alustasime Taylori konveiermeetodiga — iga liige tegi ühe kindla voldi. Kiire, kuid jäik ja vigadele vastuvõtlik.</p>
+      <h3 data-i18n="step1_title">Konveier</h3>
+      <p data-i18n="step1_text">Alustasime Taylori konveiermeetodiga — iga liige tegi ühe kindla voldi. Kiire, kuid jäik ja vigadele vastuvõtlik.</p>
     </div>
     <div class="step">
       <span class="step-num">2</span>
       <div class="step-icon">🔄</div>
-      <h3>Retrospektiiv</h3>
-      <p>Analüüsisime tulemusi ja rääkisime läbi kitsaskohad. Avastasime, et suhtlus ja paindlikkus on olulisemad kui kiirus.</p>
+      <h3 data-i18n="step2_title">Retrospektiiv</h3>
+      <p data-i18n="step2_text">Analüüsisime tulemusi ja rääkisime läbi kitsaskohad. Avastasime, et suhtlus ja paindlikkus on olulisemad kui kiirus.</p>
     </div>
     <div class="step">
       <span class="step-num">3</span>
       <div class="step-icon">⚡</div>
-      <h3>Agiilne Sprint</h3>
-      <p>Lülitusime üle agiilsele meetodile — lühikesed sprintid, pidev tagasiside ja iteratiivne täiustamine igal ringil.</p>
+      <h3 data-i18n="step3_title">Agiilne Sprint</h3>
+      <p data-i18n="step3_text">Lülitusime üle agiilsele meetodile — lühikesed sprintid, pidev tagasiside ja iteratiivne täiustamine igal ringil.</p>
     </div>
     <div class="step">
       <span class="step-num">4</span>
       <div class="step-icon">🚀</div>
-      <h3>Parim Tulemus</h3>
-      <p>Sprint 4 andis meie parima lennuki. Spiral Glider V1 on tõend, et agiilne lähenemine toob paremaid tulemusi.</p>
+      <h3 data-i18n="step4_title">Parim Tulemus</h3>
+      <p data-i18n="step4_text">Sprint 4 andis meie parima lennuki. Spiral Glider V1 on tõend, et agiilne lähenemine toob paremaid tulemusi.</p>
     </div>
   </div>
 </section>
@@ -633,42 +677,25 @@
 <!-- IRON TRIANGLE -->
 <section class="triangle-section" id="triangle">
   <div class="fade-in">
-    <p class="section-label">// Projektijuhtimine</p>
-    <h2 class="section-title">Raudne<br>Kolmnurk</h2>
+    <p class="section-label" data-i18n="tri_label">// Projektijuhtimine</p>
+    <h2 class="section-title"><span data-i18n="tri_title1">Raudne</span><br><span data-i18n="tri_title2">Kolmnurk</span></h2>
   </div>
   <div class="triangle-wrap fade-in">
     <svg class="triangle-svg" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Triangle -->
       <polygon points="200,30 370,320 30,320" fill="none" stroke="#0a0a0a" stroke-width="3"/>
-      <!-- Inner triangle -->
       <polygon points="200,100 310,300 90,300" fill="rgba(46,204,113,0.12)" stroke="#2ecc71" stroke-width="1.5" stroke-dasharray="6,4"/>
-      <!-- Labels -->
-      <text x="200" y="20" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#2ecc71">AEG</text>
-      <text x="380" y="335" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#1a3a8f">MAKSUMUS</text>
-      <text x="20" y="335" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#0a0a0a">ULATUS</text>
-      <!-- Center text -->
-      <text x="200" y="200" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="16" fill="#888">KVALITEET</text>
-      <!-- Dots -->
+      <text x="200" y="20" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#2ecc71" data-i18n-svg="tri_time">AEG</text>
+      <text x="380" y="335" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#1a3a8f" data-i18n-svg="tri_cost">MAKSUMUS</text>
+      <text x="20" y="335" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#0a0a0a" data-i18n-svg="tri_scope">ULATUS</text>
+      <text x="200" y="200" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="16" fill="#888" data-i18n-svg="tri_quality">KVALITEET</text>
       <circle cx="200" cy="30" r="5" fill="#2ecc71"/>
       <circle cx="370" cy="320" r="5" fill="#1a3a8f"/>
       <circle cx="30" cy="320" r="5" fill="#0a0a0a"/>
     </svg>
-
     <div class="triangle-text">
-      <p>
-        <strong>Raudne kolmnurk</strong> on projektijuhtimise põhimudel, mis näitab 
-        kolme piirangu vahelist tasakaalu: <strong>Aeg, Maksumus ja Ulatus</strong>.
-      </p>
-      <p>
-        Meie lennukitehase katses pidime pidevalt valima — kas teha rohkem 
-        lennukeid (ulatus), teha neid kiiremini (aeg) või kasutada rohkem materjali 
-        (maksumus).
-      </p>
-      <p>
-        Agiilne lähenemine võimaldas meil iga sprintiga kolmnurka ümber kalibreerida 
-        ja leida optimaalne tasakaal. Tulemuseks on <strong>Spiral Glider V1</strong> — 
-        meie parim kompromiss kõigi kolme piirangu vahel.
-      </p>
+      <p data-i18n="tri_p1"><strong>Raudne kolmnurk</strong> on projektijuhtimise põhimudel, mis näitab kolme piirangu vahelist tasakaalu: <strong>Aeg, Maksumus ja Ulatus</strong>.</p>
+      <p data-i18n="tri_p2">Meie lennukitehase katses pidime pidevalt valima — kas teha rohkem lennukeid (ulatus), teha neid kiiremini (aeg) või kasutada rohkem materjali (maksumus).</p>
+      <p data-i18n="tri_p3">Agiilne lähenemine võimaldas meil iga sprintiga kolmnurka ümber kalibreerida ja leida optimaalne tasakaal. Tulemuseks on <strong>Spiral Glider V1</strong> — meie parim kompromiss kõigi kolme piirangu vahel.</p>
     </div>
   </div>
 </section>
@@ -676,26 +703,35 @@
 <!-- TEAM -->
 <section class="team" id="team">
   <div class="fade-in">
-    <p class="section-label">// Meeskond</p>
+    <p class="section-label" data-i18n="team_label">// Meeskond</p>
     <h2 class="section-title">PaperWing<br>Factory</h2>
   </div>
   <div class="team-grid fade-in">
     <div class="member">
       <div class="avatar">TM</div>
-      <div class="member-name">Martin</div>
+      <div class="member-name">Tiimiliige 1</div>
       <div class="member-role">CEO / Peavoltija</div>
     </div>
     <div class="member">
       <div class="avatar">TM</div>
-      <div class="member-name">Anastasiia Radasheva</div>
+      <div class="member-name">Tiimiliige 2</div>
       <div class="member-role">CTO / Aerodünaamik</div>
     </div>
     <div class="member">
       <div class="avatar">TM</div>
-      <div class="member-name">Illia</div>
+      <div class="member-name">Tiimiliige 3</div>
       <div class="member-role">Design Lead</div>
     </div>
-
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 4</div>
+      <div class="member-role">QA / Testlendur</div>
+    </div>
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 5</div>
+      <div class="member-role">Scrum Master</div>
+    </div>
   </div>
 </section>
 
@@ -703,22 +739,154 @@
 <footer>
   <div>
     <a href="#" class="logo">Paper<span>Wing</span> Factory</a>
-    <p class="footer-copy">© 2026 PaperWing Factory. Kõik õigused kaitstud.</p>
+    <p class="footer-copy" data-i18n="footer_copy">© 2025 PaperWing Factory. Kõik õigused kaitstud.</p>
   </div>
   <div class="footer-right">
-    <div>VR 5.1 — Lennukitehas Rühmaülesanne</div>
+    <div data-i18n="footer_course">VR 5.1 — Lennukitehas Rühmaülesanne</div>
     <div>AT 5.0 Projektijuhtimine ja Agiilsus</div>
     <div style="color: rgba(255,255,255,0.2); margin-top:0.5rem;">Spiral Glider V1 · Sprint 4</div>
   </div>
 </footer>
 
 <script>
-  // Fade-in on scroll
+  // ── TRANSLATIONS ──
+  const translations = {
+    et: {
+      nav_specs: "Spetsifikatsioonid",
+      nav_gallery: "Galerii",
+      nav_process: "Protsess",
+      nav_team: "Meeskond",
+      badge: "Sprint 4 — Uusim toodang",
+      hero_meet: "Kohtu",
+      hero_sub: "Sündinud meie rühma agiilsest eksperimendist — Taylorismist iteratiivse arenduseni. Spiral Glider V1 on optimeeritud stabiilsuse ja maksimaalseks viskekauguse jaoks standardsel A4 paberil.",
+      btn_specs: "Vaata spetsifikatsioone",
+      btn_process: "Meie protsess",
+      specs_label: "// Tehnilised andmed",
+      specs_title: "Spetsifikatsioonid",
+      unit_cm: "sentimeetrit", unit_g: "grammi", unit_m: "meetrit",
+      unit_std: "standard", unit_scale: "hindeskaalal 5", unit_folds: "volti",
+      spec_wingspan: "Tiivaulatus", spec_weight: "Paberikaal", spec_range: "Max viskekaugus",
+      spec_format: "Paberivormaat", spec_stability: "Stabiilsus", spec_folds: "Voltimissamme",
+      gallery_label: "// Lennuki galerii",
+      gallery_title1: "Meie parim", gallery_title2: "toodang",
+      process_label: "// Tootmisprotsess",
+      process_title1: "Taylorismist", process_title2: "Agiilsuseni",
+      step1_title: "Konveier", step1_text: "Alustasime Taylori konveiermeetodiga — iga liige tegi ühe kindla voldi. Kiire, kuid jäik ja vigadele vastuvõtlik.",
+      step2_title: "Retrospektiiv", step2_text: "Analüüsisime tulemusi ja rääkisime läbi kitsaskohad. Avastasime, et suhtlus ja paindlikkus on olulisemad kui kiirus.",
+      step3_title: "Agiilne Sprint", step3_text: "Lülitusime üle agiilsele meetodile — lühikesed sprintid, pidev tagasiside ja iteratiivne täiustamine igal ringil.",
+      step4_title: "Parim Tulemus", step4_text: "Sprint 4 andis meie parima lennuki. Spiral Glider V1 on tõend, et agiilne lähenemine toob paremaid tulemusi.",
+      tri_label: "// Projektijuhtimine",
+      tri_title1: "Raudne", tri_title2: "Kolmnurk",
+      tri_time: "AEG", tri_cost: "MAKSUMUS", tri_scope: "ULATUS", tri_quality: "KVALITEET",
+      tri_p1: "<strong>Raudne kolmnurk</strong> on projektijuhtimise põhimudel, mis näitab kolme piirangu vahelist tasakaalu: <strong>Aeg, Maksumus ja Ulatus</strong>.",
+      tri_p2: "Meie lennukitehase katses pidime pidevalt valima — kas teha rohkem lennukeid (ulatus), teha neid kiiremini (aeg) või kasutada rohkem materjali (maksumus).",
+      tri_p3: "Agiilne lähenemine võimaldas meil iga sprintiga kolmnurka ümber kalibreerida ja leida optimaalne tasakaal. Tulemuseks on <strong>Spiral Glider V1</strong> — meie parim kompromiss kõigi kolme piirangu vahel.",
+      team_label: "// Meeskond",
+      footer_copy: "© 2025 PaperWing Factory. Kõik õigused kaitstud.",
+      footer_course: "VR 5.1 — Lennukitehas Rühmaülesanne",
+    },
+    en: {
+      nav_specs: "Specifications",
+      nav_gallery: "Gallery",
+      nav_process: "Process",
+      nav_team: "Team",
+      badge: "Sprint 4 — Latest Release",
+      hero_meet: "Meet the",
+      hero_sub: "Born from our team's agile experiment — from Taylorism to iterative development. Spiral Glider V1 is optimised for stability and maximum throw distance using a standard A4 sheet.",
+      btn_specs: "View specifications",
+      btn_process: "Our process",
+      specs_label: "// Technical data",
+      specs_title: "Specifications",
+      unit_cm: "centimetres", unit_g: "grams", unit_m: "metres",
+      unit_std: "standard", unit_scale: "out of 5", unit_folds: "folds",
+      spec_wingspan: "Wingspan", spec_weight: "Paper weight", spec_range: "Max throw distance",
+      spec_format: "Paper format", spec_stability: "Stability", spec_folds: "Folding steps",
+      gallery_label: "// Plane gallery",
+      gallery_title1: "Our finest", gallery_title2: "product",
+      process_label: "// Production process",
+      process_title1: "From Taylorism", process_title2: "to Agility",
+      step1_title: "Assembly line", step1_text: "We started with Taylor's conveyor method — each member performed one fixed fold. Fast, but rigid and error-prone.",
+      step2_title: "Retrospective", step2_text: "We analysed the results and talked through bottlenecks. We discovered that communication and flexibility matter more than speed.",
+      step3_title: "Agile Sprint", step3_text: "We switched to an agile approach — short sprints, continuous feedback, and iterative improvement each cycle.",
+      step4_title: "Best Result", step4_text: "Sprint 4 delivered our best plane. Spiral Glider V1 is proof that an agile approach produces better outcomes.",
+      tri_label: "// Project management",
+      tri_title1: "Iron", tri_title2: "Triangle",
+      tri_time: "TIME", tri_cost: "COST", tri_scope: "SCOPE", tri_quality: "QUALITY",
+      tri_p1: "The <strong>Iron Triangle</strong> is a core project management model showing the balance between three constraints: <strong>Time, Cost and Scope</strong>.",
+      tri_p2: "In our paper plane factory experiment, we constantly had to choose — make more planes (scope), make them faster (time), or use more materials (cost).",
+      tri_p3: "The agile approach allowed us to recalibrate the triangle each sprint and find the optimal balance. The result is <strong>Spiral Glider V1</strong> — our best compromise across all three constraints.",
+      team_label: "// Team",
+      footer_copy: "© 2025 PaperWing Factory. All rights reserved.",
+      footer_course: "VR 5.1 — Paper Plane Factory Group Assignment",
+    }
+  };
+
+  let currentLang = localStorage.getItem('lang') || 'et';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    const t = translations[lang];
+
+    // Regular elements
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // SVG text elements
+    document.querySelectorAll('[data-i18n-svg]').forEach(el => {
+      const key = el.getAttribute('data-i18n-svg');
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+
+    // Update button label
+    const btn = document.getElementById('langBtn');
+    if (lang === 'et') {
+      btn.innerHTML = '<span class="active">ET</span> / EN';
+    } else {
+      btn.innerHTML = 'ET / <span class="active">EN</span>';
+    }
+
+    document.documentElement.lang = lang;
+  }
+
+  function toggleLang() {
+    applyLang(currentLang === 'et' ? 'en' : 'et');
+  }
+
+  // ── THEME ──
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    document.getElementById('themeBtn').textContent = theme === 'dark' ? '🌙' : '☀️';
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  }
+
+  // ── INIT ──
+  (function init() {
+    // Theme: respect saved preference, then OS preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      applyTheme(savedTheme);
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      applyTheme('dark');
+    } else {
+      applyTheme('light');
+    }
+
+    // Language
+    applyLang(currentLang);
+  })();
+
+  // ── FADE-IN ON SCROLL ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-      }
+      if (e.isIntersecting) e.target.classList.add('visible');
     });
   }, { threshold: 0.12 });
 
