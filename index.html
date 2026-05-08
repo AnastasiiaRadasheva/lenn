@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaperWing Factory — Lennukitehas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #2ecc71;
+      --green-dark: #1a7a44;
+      --ink: #0a0a0a;
+      --paper: #f5f0e8;
+      --cream: #faf7f2;
+      --blue-ink: #1a3a8f;
+      --gray: #888;
+      --accent: #e8e0d0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .logo span { color: var(--green); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      text-decoration: none;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--ink); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 8rem 3rem 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46,204,113,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* grid lines decoration */
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-text { position: relative; z-index: 2; }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      background: var(--green);
+      color: #fff;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(4rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: 2px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--green);
+      -webkit-text-stroke: 0px;
+    }
+
+    .hero h1 .outline {
+      -webkit-text-stroke: 2px var(--ink);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #555;
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.9rem 2rem;
+      border: 2px solid var(--ink);
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s;
+      cursor: pointer;
+      background: transparent;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    .btn.primary {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .btn.primary:hover {
+      background: var(--green-dark);
+      border-color: var(--green-dark);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .plane-img-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 540px;
+    }
+
+    .plane-img-wrap img {
+      width: 100%;
+      border-radius: 4px;
+      box-shadow: 20px 20px 0px var(--accent), 22px 22px 0px var(--green);
+      display: block;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-12px) rotate(1deg); }
+    }
+
+    .tag-sticker {
+      position: absolute;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      padding: 0.4rem 0.8rem;
+      border-radius: 2px;
+    }
+
+    .tag-sticker.top { top: -12px; right: 20px; background: var(--blue-ink); }
+    .tag-sticker.bottom { bottom: -12px; left: 20px; }
+
+    /* ── SPECS ── */
+    .specs {
+      padding: 6rem 3rem;
+      background: var(--paper);
+      border-top: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', cursive;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 2px;
+      margin-bottom: 3rem;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      border: 2px solid var(--ink);
+    }
+
+    .spec-item {
+      padding: 2rem 1.8rem;
+      border-right: 1px solid var(--accent);
+      border-bottom: 1px solid var(--accent);
+      transition: background 0.2s;
+    }
+
+    .spec-item:hover { background: var(--cream); }
+
+    .spec-val {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 3.2rem;
+      line-height: 1;
+      color: var(--green);
+      letter-spacing: 1px;
+    }
+
+    .spec-unit {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--gray);
+      margin-bottom: 0.5rem;
+    }
+
+    .spec-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery {
+      padding: 6rem 3rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--accent);
+      transition: filter 0.3s;
+    }
+
+    .gallery-grid img:hover { filter: sepia(20%) contrast(1.1); }
+
+    .gallery-col {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .gallery-col img { height: 200px; }
+    .gallery-grid > img { height: 416px; }
+
+    /* ── PROCESS ── */
+    .process {
+      padding: 6rem 3rem;
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    .process .section-label { color: var(--green); }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+      margin-top: 3rem;
+    }
+
+    .step {
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s;
+    }
+
+    .step:hover { background: rgba(46, 204, 113, 0.08); }
+
+    .step-num {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(255,255,255,0.06);
+      position: absolute;
+      top: 0.5rem; right: 1rem;
+      pointer-events: none;
+    }
+
+    .step-icon {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .step h3 {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: var(--green);
+      margin-bottom: 0.8rem;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+    }
+
+    /* ── IRON TRIANGLE ── */
+    .triangle-section {
+      padding: 6rem 3rem;
+      background: var(--paper);
+    }
+
+    .triangle-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    .triangle-svg { width: 100%; max-width: 380px; }
+
+    .triangle-text p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.2rem;
+    }
+
+    .triangle-text strong { color: var(--ink); }
+
+    /* ── TEAM ── */
+    .team {
+      padding: 6rem 3rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1px;
+      border: 2px solid var(--ink);
+      margin-top: 3rem;
+    }
+
+    .member {
+      padding: 2rem 1.5rem;
+      border-right: 1px solid var(--accent);
+      text-align: center;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .member:hover { background: var(--paper); }
+
+    .avatar {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: var(--ink);
+      margin: 0 auto 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', cursive;
+      font-size: 1.4rem;
+      color: var(--green);
+    }
+
+    .member-name {
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .member-role {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.5);
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    footer .logo { color: var(--cream); }
+    footer .logo span { color: var(--green); }
+
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      margin-top: 0.5rem;
+    }
+
+    .footer-right {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-align: right;
+      line-height: 2;
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--green); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.2rem; }
+      .hero { grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-grid > img { height: 260px; }
+      .gallery-col img { height: 200px; }
+      .triangle-wrap { grid-template-columns: 1fr; }
+      .specs, .gallery, .process, .triangle-section, .team { padding: 4rem 1.5rem; }
+      footer { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+      .footer-right { text-align: left; }
+    }
+
+    /* ── FADE-IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Paper<span>Wing</span> Factory</a>
+  <ul>
+    <li><a href="#specs">Spetsifikatsioonid</a></li>
+    <li><a href="#gallery">Galerii</a></li>
+    <li><a href="#process">Protsess</a></li>
+    <li><a href="#team">Meeskond</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text fade-in">
+    <span class="badge">Sprint 4 — Uusim toodang</span>
+    <h1>
+      Kohtu<br>
+      <em>Spiral</em><br>
+      <span class="outline">Glider</span><br>
+      V1-ga.
+    </h1>
+    <p class="hero-sub">
+      Sündinud meie rühma agiilsest eksperimendist — Taylorismist iteratiivse 
+      arenduseni. Spiral Glider V1 on optimeeritud stabiilsuse ja maksimaalseks 
+      viskekauguse jaoks standardsel A4 paberil.
+    </p>
+    <div class="btn-group">
+      <a href="#specs" class="btn primary">Vaata spetsifikatsioone</a>
+      <a href="#process" class="btn">Meie protsess</a>
+    </div>
+  </div>
+
+  <div class="hero-visual fade-in">
+    <div class="plane-img-wrap">
+      <img src="IMG_6030.jpeg" alt="Spiral Glider V1" />
+      <span class="tag-sticker top">✦ Sprint 4 Build</span>
+      <span class="tag-sticker bottom">PaperWing Factory © 2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- SPECS -->
+<section class="specs" id="specs">
+  <div class="fade-in">
+    <p class="section-label">// Tehnilised andmed</p>
+    <h2 class="section-title">Spiral Glider V1<br>Spetsifikatsioonid</h2>
+  </div>
+  <div class="specs-grid fade-in">
+    <div class="spec-item">
+      <div class="spec-val">68</div>
+      <div class="spec-unit">sentimeetrit</div>
+      <div class="spec-name">Tiivaulatus</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-val">5</div>
+      <div class="spec-unit">grammi</div>
+      <div class="spec-name">Paberikaal</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-val">9.4</div>
+      <div class="spec-unit">meetrit</div>
+      <div class="spec-name">Max viskekaugus</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-val">A4</div>
+      <div class="spec-unit">standard</div>
+      <div class="spec-name">Paberivormaat</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-val">★★★★</div>
+      <div class="spec-unit">hindeskaalal 5</div>
+      <div class="spec-name">Stabiilsus</div>
+    </div>
+    <div class="spec-item">
+      <div class="spec-val">12</div>
+      <div class="spec-unit">volti</div>
+      <div class="spec-name">Voltimissamme</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="fade-in">
+    <p class="section-label">// Lennuki galerii</p>
+    <h2 class="section-title">Meie parim<br>toodang</h2>
+  </div>
+  <div class="gallery-grid fade-in">
+    <img src="IMG_6030.jpeg" alt="Spiral Glider küljelt" />
+    <div class="gallery-col">
+      <img src="IMG_6031.jpeg" alt="Spiral Glider käes" />
+      <img src="IMG_6029.jpeg" alt="Spiral Glider laual" />
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="fade-in">
+    <p class="section-label">// Tootmisprotsess</p>
+    <h2 class="section-title" style="color:var(--cream)">Taylorismist<br>Agiilsuseni</h2>
+  </div>
+  <div class="process-steps fade-in">
+    <div class="step">
+      <span class="step-num">1</span>
+      <div class="step-icon">🏭</div>
+      <h3>Konveier</h3>
+      <p>Alustasime Taylori konveiermeetodiga — iga liige tegi ühe kindla voldi. Kiire, kuid jäik ja vigadele vastuvõtlik.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <div class="step-icon">🔄</div>
+      <h3>Retrospektiiv</h3>
+      <p>Analüüsisime tulemusi ja rääkisime läbi kitsaskohad. Avastasime, et suhtlus ja paindlikkus on olulisemad kui kiirus.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <div class="step-icon">⚡</div>
+      <h3>Agiilne Sprint</h3>
+      <p>Lülitusime üle agiilsele meetodile — lühikesed sprintid, pidev tagasiside ja iteratiivne täiustamine igal ringil.</p>
+    </div>
+    <div class="step">
+      <span class="step-num">4</span>
+      <div class="step-icon">🚀</div>
+      <h3>Parim Tulemus</h3>
+      <p>Sprint 4 andis meie parima lennuki. Spiral Glider V1 on tõend, et agiilne lähenemine toob paremaid tulemusi.</p>
+    </div>
+  </div>
+</section>
+
+<!-- IRON TRIANGLE -->
+<section class="triangle-section" id="triangle">
+  <div class="fade-in">
+    <p class="section-label">// Projektijuhtimine</p>
+    <h2 class="section-title">Raudne<br>Kolmnurk</h2>
+  </div>
+  <div class="triangle-wrap fade-in">
+    <svg class="triangle-svg" viewBox="0 0 400 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Triangle -->
+      <polygon points="200,30 370,320 30,320" fill="none" stroke="#0a0a0a" stroke-width="3"/>
+      <!-- Inner triangle -->
+      <polygon points="200,100 310,300 90,300" fill="rgba(46,204,113,0.12)" stroke="#2ecc71" stroke-width="1.5" stroke-dasharray="6,4"/>
+      <!-- Labels -->
+      <text x="200" y="20" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#2ecc71">AEG</text>
+      <text x="380" y="335" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#1a3a8f">MAKSUMUS</text>
+      <text x="20" y="335" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="20" fill="#0a0a0a">ULATUS</text>
+      <!-- Center text -->
+      <text x="200" y="200" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="16" fill="#888">KVALITEET</text>
+      <!-- Dots -->
+      <circle cx="200" cy="30" r="5" fill="#2ecc71"/>
+      <circle cx="370" cy="320" r="5" fill="#1a3a8f"/>
+      <circle cx="30" cy="320" r="5" fill="#0a0a0a"/>
+    </svg>
+
+    <div class="triangle-text">
+      <p>
+        <strong>Raudne kolmnurk</strong> on projektijuhtimise põhimudel, mis näitab 
+        kolme piirangu vahelist tasakaalu: <strong>Aeg, Maksumus ja Ulatus</strong>.
+      </p>
+      <p>
+        Meie lennukitehase katses pidime pidevalt valima — kas teha rohkem 
+        lennukeid (ulatus), teha neid kiiremini (aeg) või kasutada rohkem materjali 
+        (maksumus).
+      </p>
+      <p>
+        Agiilne lähenemine võimaldas meil iga sprintiga kolmnurka ümber kalibreerida 
+        ja leida optimaalne tasakaal. Tulemuseks on <strong>Spiral Glider V1</strong> — 
+        meie parim kompromiss kõigi kolme piirangu vahel.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="fade-in">
+    <p class="section-label">// Meeskond</p>
+    <h2 class="section-title">PaperWing<br>Factory</h2>
+  </div>
+  <div class="team-grid fade-in">
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 1</div>
+      <div class="member-role">CEO / Peavoltija</div>
+    </div>
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 2</div>
+      <div class="member-role">CTO / Aerodünaamik</div>
+    </div>
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 3</div>
+      <div class="member-role">Design Lead</div>
+    </div>
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 4</div>
+      <div class="member-role">QA / Testlendur</div>
+    </div>
+    <div class="member">
+      <div class="avatar">TM</div>
+      <div class="member-name">Tiimiliige 5</div>
+      <div class="member-role">Scrum Master</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <a href="#" class="logo">Paper<span>Wing</span> Factory</a>
+    <p class="footer-copy">© 2025 PaperWing Factory. Kõik õigused kaitstud.</p>
+  </div>
+  <div class="footer-right">
+    <div>VR 5.1 — Lennukitehas Rühmaülesanne</div>
+    <div>AT 5.0 Projektijuhtimine ja Agiilsus</div>
+    <div style="color: rgba(255,255,255,0.2); margin-top:0.5rem;">Spiral Glider V1 · Sprint 4</div>
+  </div>
+</footer>
+
+<script>
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
